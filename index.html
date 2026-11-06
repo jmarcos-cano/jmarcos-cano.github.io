@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio of Jairo Marcos Cano, Senior Platform Engineer: GKE, Terraform, GitOps and cloud cost work.">
+<title>Jairo Marcos Cano, Platform Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column, case studies as ruled entries with a mono "facts" rail on wide screens, stacked on phones. */
+:root {
+  --bg: #f5f7f8;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #536371;
+  --line: #d5dde2;
+  --accent: #0a6c74;
+  --accent-soft: #dcefef;
+  --font-display: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d151c; --surface: #131e27; --fg: #e4ebf0; --muted: #94a5b2;
+    --line: #26333f; --accent: #5cc8cf; --accent-soft: #12333a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d151c; --surface: #131e27; --fg: #e4ebf0; --muted: #94a5b2;
+  --line: #26333f; --accent: #5cc8cf; --accent-soft: #12333a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: 880px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+.label {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* Hero */
+header { padding-block: 56px 40px; border-bottom: 1px solid var(--line); }
+header .label { color: var(--accent); }
+h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 700; letter-spacing: -.02em; margin-top: 14px; }
+.thesis { font-family: var(--font-display); font-size: clamp(1.3rem, 3.2vw, 1.8rem); font-weight: 500; line-height: 1.3; max-width: 30ch; margin-top: 20px; text-wrap: balance; }
+.intro { max-width: 62ch; color: var(--muted); margin-top: 20px; }
+.intro strong { color: var(--fg); font-weight: 500; }
+.links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 24px; font-family: var(--font-mono); font-size: 14px; }
+.links span, .links a { overflow-wrap: anywhere; }
+
+/* Sections */
+section { padding-block: 48px; border-bottom: 1px solid var(--line); }
+section > .head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; margin-bottom: 8px; }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 700; letter-spacing: -.01em; }
+.sub { color: var(--muted); max-width: 62ch; margin: 8px 0 0; }
+
+/* Case studies */
+.case { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 20px 40px; padding-block: 32px; border-top: 1px solid var(--line); margin-top: 28px; }
+.case:first-of-type { margin-top: 24px; }
+.facts { display: flex; flex-direction: column; gap: 14px; align-content: start; }
+.fact b { display: block; font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; line-height: 1.1; color: var(--accent); }
+.fact span { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+.case h3 { font-size: 1.35rem; font-weight: 700; }
+.case dl { margin: 16px 0 0; display: grid; gap: 14px; }
+.case dt { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.case dd { margin: 2px 0 0; max-width: 62ch; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; padding: 0; list-style: none; }
+.chips li { font-family: var(--font-mono); font-size: 12px; padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+
+/* Platform flow diagram (generic, no internal names) */
+.flow { margin-top: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px; overflow-x: auto; }
+.flow-grid { display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)); gap: 12px; align-items: stretch; min-width: 560px; }
+.node { border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; background: var(--bg); font-size: 14px; position: relative; }
+.node b { display: block; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .04em; color: var(--accent); margin-bottom: 2px; }
+.node:not(:last-child)::after { content: "→"; position: absolute; right: -12px; top: 50%; transform: translate(50%, -50%); color: var(--muted); font-family: var(--font-mono); background: var(--surface); line-height: 1; }
+.flow-note { font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin: 14px 0 0; }
+
+/* Earlier work + community */
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 40px; margin-top: 24px; }
+.item h3 { font-size: 1.1rem; font-weight: 700; }
+.item .label { display: block; margin-bottom: 6px; }
+.item p { margin: 8px 0 0; max-width: 56ch; }
+
+/* Stack */
+.stack { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 10px 40px; margin: 24px 0 0; }
+.stack dt { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.stack dd { margin: 0 0 8px; }
+
+/* In progress */
+.wip { margin-top: 24px; border: 1px dashed var(--line); border-radius: 8px; padding: 20px; background: var(--surface); }
+.wip ul { margin: 10px 0 0; padding-left: 20px; max-width: 62ch; }
+.pill { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; background: var(--accent-soft); color: var(--accent); padding: 3px 9px; border-radius: 999px; }
+
+footer { padding-block: 40px 64px; color: var(--muted); font-size: 14px; }
+footer .links { margin-top: 12px; }
+button.copy { font: inherit; font-family: var(--font-mono); font-size: 12px; margin-left: 8px; background: transparent; color: var(--accent); border: 1px solid var(--line); border-radius: 4px; padding: 2px 8px; cursor: pointer; }
+button.copy:hover { border-color: var(--accent); }
+
+@media (max-width: 720px) {
+  header { padding-block: 40px 32px; }
+  section { padding-block: 36px; }
+  .case, .stack, .pair { grid-template-columns: minmax(0, 1fr); }
+  .facts { flex-direction: row; flex-wrap: wrap; gap: 12px 28px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <div class="label">Platform engineering · Guatemala City</div>
+    <h1>Jairo Marcos Cano</h1>
+    <p class="thesis">I build the cloud platforms other engineers deploy onto.</p>
+    <p class="intro">
+      Senior Platform Engineer with more than 12 years in infrastructure, DevOps and cloud. At <strong>Geotab</strong> I own the infrastructure for the Routing and Optimization domain on the company-wide Google Cloud and GKE platform: Terraform modules, infrastructure as code and lifecycle. Before that I rebuilt delivery pipelines, taught computer science, and ran bootcamps for banks and global IT firms.
+    </p>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/marcos-cano-804a1787">LinkedIn</a>
+      <span>jmarcos.cano@gmail.com</span>
+    </div>
+  </header>
+
+  <section id="work">
+    <div class="head"><h2>Selected work</h2><span class="label">Geotab · 2019 – present</span></div>
+    <p class="sub">The code and internal systems stay at the company. These write-ups cover the problem, the decisions and the outcome, with system names generalized.</p>
+
+    <article class="case">
+      <div class="facts">
+        <div class="fact"><b>6</b><span>GKE clusters, US / EU / Asia</span></div>
+        <div class="fact"><b>44</b><span>services on the platform</span></div>
+      </div>
+      <div>
+        <h3>Leaving the data center for GKE</h3>
+        <dl>
+          <div><dt>Problem</dt><dd>A routing and optimization domain ran on legacy hosting split between on-premises data centers and AWS, as larger applications that were hard to scale and release independently.</dd></div>
+          <div><dt>Approach</dt><dd>I led the move in two stages. First a lift-and-shift to Google Cloud to get out of the old hosting. Then a re-platform until every workload ran as its own microservice on GKE, provisioned with Terraform.</dd></div>
+          <div><dt>Outcome</dt><dd>The domain runs fully cloud native across three regions, with each service scaling from dozens to hundreds of nodes as load requires.</dd></div>
+        </dl>
+        <ul class="chips"><li>GKE</li><li>Terraform</li><li>Helm</li><li>Microservices</li></ul>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="facts">
+        <div class="fact"><b>100%</b><span>of changes reviewed in Git</span></div>
+      </div>
+      <div>
+        <h3>The whole domain as code</h3>
+        <dl>
+          <div><dt>Problem</dt><dd>Infrastructure for dozens of services across several regions needs to look the same everywhere, and every change needs an owner and a record.</dd></div>
+          <div><dt>Approach</dt><dd>Reusable Terraform modules define the building blocks. Terragrunt manages each environment on top of them. Helm charts describe every service, and Argo CD applies them, so Git is the only way a change reaches an environment.</dd></div>
+          <div><dt>Outcome</dt><dd>Every change to every environment is made and reviewed through Git. New environments and services come from the same modules instead of hand-built copies.</dd></div>
+        </dl>
+        <ul class="chips"><li>Terraform</li><li>Terragrunt</li><li>Helm</li><li>Argo CD</li><li>GitOps</li></ul>
+
+        <div class="flow" role="img" aria-label="Generic platform flow: a pull request in Git is applied by Terraform and Terragrunt to Google Cloud, and by Argo CD with Helm to the GKE clusters.">
+          <div class="flow-grid">
+            <div class="node"><b>GIT</b>Pull request, review, merge</div>
+            <div class="node"><b>TERRAGRUNT</b>Environment config on shared Terraform modules</div>
+            <div class="node"><b>ARGO CD</b>Syncs Helm charts for each service</div>
+            <div class="node"><b>GKE</b>Clusters in US, Europe and Asia</div>
+          </div>
+          <p class="flow-note">Generic diagram of the pattern. No internal system names.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="facts">
+        <div class="fact"><b>−34%</b><span>Google Cloud cost, 2026</span></div>
+      </div>
+      <div>
+        <h3>Cutting cloud cost by a third</h3>
+        <dl>
+          <div><dt>Problem</dt><dd>A domain that scales to hundreds of nodes per service can spend a lot on Google Cloud, and the bill needs an owner.</dd></div>
+          <div><dt>Approach</dt><dd>I took on governance for the domain's infrastructure. Because everything is defined in Terraform and deployed through Argo CD, a cost change goes through the same pull request flow as any other change, so it is reviewed, rolled out gradually and can be reverted.</dd></div>
+          <div><dt>Outcome</dt><dd>Google Cloud costs for the domain fell by 34% in 2026.</dd></div>
+        </dl>
+        <ul class="chips"><li>FinOps</li><li>Governance</li><li>GCP</li></ul>
+      </div>
+    </article>
+  </section>
+
+  <section id="earlier">
+    <div class="head"><h2>Earlier work</h2><span class="label">Mobi / BSM Technologies · 2017 – 2019</span></div>
+    <div class="pair">
+      <div class="item">
+        <span class="label">Delivery pipeline</span>
+        <h3>Weeks to hours</h3>
+        <p>Rebuilt the delivery pipeline in under 8 months. The result was one-click deployments to any environment and a business that decides when and what to release. Release lead time dropped from weeks to hours.</p>
+      </div>
+      <div class="item">
+        <span class="label">Containerization</span>
+        <h3>48+ applications, 16+ clusters</h3>
+        <p>Moved more than 48 monolith-style applications to independently deployable services on Docker Swarm, across more than 16 multi-AZ clusters, with approvals and releases through Octopus Deploy.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="teaching">
+    <div class="head"><h2>Teaching and community</h2><span class="label">2018 – 2024</span></div>
+    <div class="pair">
+      <div class="item">
+        <span class="label">Universidad Francisco Marroquín · 2018 – 2020</span>
+        <h3>Computer science instructor</h3>
+        <p>Taught computer science to undergraduates in Guatemala City.</p>
+      </div>
+      <div class="item">
+        <span class="label">Docker Guatemala</span>
+        <h3>Community lead</h3>
+        <p>Led the local Docker community and received an honorable mention for community leadership at DockerCon 2020.</p>
+      </div>
+      <div class="item">
+        <span class="label">kontinu.io · 2020 – 2024</span>
+        <h3>Bootcamps for banks and IT firms</h3>
+        <p>Founded a consultancy that ran cloud-native, DevOps and Extreme Programming bootcamps for two of Guatemala's largest banks and a global customer-experience and IT services company, including sessions that taught HR and recruiting teams how engineering roles work.</p>
+      </div>
+      <div class="item">
+        <span class="label">Contract work</span>
+        <h3>Healthcare platforms</h3>
+        <p>Led DevOps and cloud engineering as a contractor for Olinqua in Australia on Azure, and for DXC Technology and Dedalus on OpenShift.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="head"><h2>Stack</h2></div>
+    <dl class="stack">
+      <dt>Cloud</dt><dd>Google Cloud (GKE), Microsoft Azure (Landing Zones), AWS</dd>
+      <dt>Infrastructure as code</dt><dd>Terraform, Terragrunt, reusable module design</dd>
+      <dt>Kubernetes and GitOps</dt><dd>Kubernetes, GKE, OpenShift, Helm, Argo CD, Docker</dd>
+      <dt>CI/CD</dt><dd>GitLab CI, Jenkins, Octopus Deploy, Ansible, Chef</dd>
+      <dt>AI-assisted engineering</dt><dd>Orchestrating local and cloud AI agents for infrastructure and platform work</dd>
+      <dt>Programming</dt><dd>Go, Python, Node.js, Bash, Java, C</dd>
+    </dl>
+
+    <div class="wip">
+      <span class="pill">In progress</span>
+      <h3 style="margin-top:10px;font-size:1.15rem">Reference platform on GitHub</h3>
+      <p class="sub" style="margin-top:6px">A small public repo that rebuilds the patterns above from scratch, with no company code:</p>
+      <ul>
+        <li>A Terraform module for a GKE cluster</li>
+        <li>Argo CD managing a sample service through Helm</li>
+        <li>A policy-as-code guardrail that blocks an unsafe change before it merges</li>
+        <li>Cost labels on every resource</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div>Open to platform engineering and DevOps roles.</div>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/marcos-cano-804a1787">linkedin.com/in/marcos-cano-804a1787</a>
+      <span><span id="mail">jmarcos.cano@gmail.com</span><button class="copy" id="copy" type="button">Copy</button></span>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var b = document.getElementById("copy"), m = document.getElementById("mail");
+  b.addEventListener("click", function () {
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1500); };
+    var fallback = function () {
+      var r = document.createRange(); r.selectNodeContents(m);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      b.textContent = "Selected";
+    };
+    try { navigator.clipboard.writeText(m.textContent).then(done, fallback); } catch (e) { fallback(); }
+  });
+})();
+</script>
+
+</body>
+</html>
