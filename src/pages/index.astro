@@ -1,52 +1,84 @@
 ---
 import Base from '../layouts/Base.astro';
 import CaseStudy from '../components/CaseStudy.astro';
+import Flow from '../components/Flow.astro';
 import ItemGrid from '../components/ItemGrid.astro';
 import { profile, work, earlier, teaching, stack, wip } from '../data/site';
+
+const headline = profile.thesis.replace(profile.thesisHighlight, `<mark>${profile.thesisHighlight}</mark>`);
 ---
 <Base title={profile.title} description={profile.description}>
-  <header>
-    <div class="label">{profile.kicker}</div>
-    <h1>{profile.name}</h1>
-    <p class="thesis">{profile.thesis}</p>
-    <p class="intro" set:html={profile.intro} />
-    <div class="links">
-      <a href={profile.linkedin}>LinkedIn</a>
-      <span>{profile.email}</span>
+  <header class="top">
+    <div class="wrap">
+      <div class="bar">
+        <a class="brand" href="#top">{profile.name}</a>
+        <nav aria-label="Sections">
+          <a href="#work">Work</a>
+          <a href="#earlier">Background</a>
+          <a href="#stack">Stack</a>
+          <a class="btn sm" href={`mailto:${profile.email}`}>Email me</a>
+        </nav>
+      </div>
     </div>
   </header>
 
-  <section id="work">
-    <div class="head"><h2>{work.heading}</h2><span class="label">{work.label}</span></div>
-    <p class="sub">{work.intro}</p>
-    {work.cases.map((c) => <CaseStudy study={c} />)}
-  </section>
-
-  <ItemGrid id="earlier" heading={earlier.heading} label={earlier.label} items={earlier.items} />
-  <ItemGrid id="teaching" heading={teaching.heading} label={teaching.label} items={teaching.items} />
-
-  <section id="stack">
-    <div class="head"><h2>{stack.heading}</h2></div>
-    <dl class="stack">
-      {stack.rows.map(([k, v]) => (<><dt>{k}</dt><dd>{v}</dd></>))}
-    </dl>
-    {wip && (
-      <div class="wip">
-        <span class="pill">In progress</span>
-        <h3 style="margin-top:10px;font-size:1.15rem">{wip.title}</h3>
-        <p class="sub" style="margin-top:6px">{wip.text}</p>
-        <ul>{wip.bullets.map((b) => <li>{b}</li>)}</ul>
+  <main id="top">
+    <section class="hero wrap">
+      <h1 set:html={headline} />
+      <div class="hero-row">
+        <div>
+          <p class="lede">{profile.short}</p>
+          <div class="actions">
+            <a class="btn" href={`mailto:${profile.email}`}>Email me</a>
+            <a class="btn ghost" href={profile.linkedin}>LinkedIn</a>
+          </div>
+        </div>
+        <Flow />
       </div>
-    )}
-  </section>
+    </section>
 
-  <footer>
-    <div>{profile.tagline}</div>
-    <div class="links">
-      <a href={profile.linkedin}>{profile.linkedinLabel}</a>
-      <span><span id="mail">{profile.email}</span><button class="copy" id="copy" type="button">Copy</button></span>
+    <section id="work" class="sec wrap">
+      <h2>{work.heading}</h2>
+      <p class="meta">{work.label}</p>
+      <p class="sub">{work.intro}</p>
+      <div class="cases">
+        {work.cases.map((c) => <CaseStudy study={c} />)}
+      </div>
+      {wip && (
+        <div class="wip">
+          <div>
+            <span class="tag">In progress</span>
+            <h3>{wip.title}</h3>
+            <p class="sub">{wip.text}</p>
+          </div>
+          <ul>{wip.bullets.map((b) => <li>{b}</li>)}</ul>
+        </div>
+      )}
+    </section>
+
+    <ItemGrid id="earlier" variant="tiles" heading={earlier.heading} label={earlier.label} items={earlier.items} />
+    <ItemGrid id="teaching" variant="list" heading={teaching.heading} label={teaching.label} items={teaching.items} />
+
+    <section id="stack" class="sec wrap">
+      <h2>{stack.heading}</h2>
+      <dl class="stack">
+        {stack.rows.map(([k, v]) => (<div><dt>{k}</dt><dd>{v}</dd></div>))}
+      </dl>
+    </section>
+  </main>
+
+  <footer class="close wrap">
+    <div class="cta">
+      <h2>{profile.tagline}</h2>
+      <div class="side">
+        <a class="btn" href={`mailto:${profile.email}`}>Email me</a>
+        <div class="mail"><span id="mail">{profile.email}</span><button class="btn ghost sm" id="copy" type="button">Copy</button></div>
+        <a href={profile.linkedin}>{profile.linkedinLabel}</a>
+        <p class="where">{profile.location}</p>
+      </div>
     </div>
   </footer>
+
 </Base>
 
 <script>

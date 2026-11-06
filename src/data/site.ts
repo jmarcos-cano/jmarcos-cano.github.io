@@ -2,8 +2,11 @@
 
 export const profile = {
   name: 'Jairo Marcos Cano',
-  kicker: 'Platform engineering · Guatemala City',
+  location: 'Guatemala City',
   thesis: 'I build the cloud platforms other engineers deploy onto.',
+  thesisHighlight: 'cloud platforms', // wrapped in a highlight in the hero headline
+  short:
+    'Senior Platform Engineer at Geotab. I own GKE, Terraform and GitOps for the Routing and Optimization domain.',
   intro:
     'Senior Platform Engineer with more than 12 years in infrastructure, DevOps and cloud. At <strong>Geotab</strong> I own the infrastructure for the Routing and Optimization domain on the company-wide Google Cloud and GKE platform: Terraform modules, infrastructure as code and lifecycle. Before that I rebuilt delivery pipelines, taught computer science, and ran bootcamps for banks and global IT firms.',
   linkedin: 'https://www.linkedin.com/in/marcos-cano-804a1787',
@@ -22,12 +25,11 @@ export type Case = {
   approach: string;
   outcome: string;
   chips: string[];
-  flow?: boolean; // show the generic platform diagram under this case
 };
 
 export const work = {
   heading: 'Selected work',
-  label: 'Geotab · 2019 – present',
+  label: 'Geotab, 2019 - present',
   intro:
     'The code and internal systems stay at the company. These write-ups cover the problem, the decisions and the outcome, with system names generalized.',
   cases: [
@@ -55,7 +57,6 @@ export const work = {
       outcome:
         'Every change to every environment is made and reviewed through Git. New environments and services come from the same modules instead of hand-built copies.',
       chips: ['Terraform', 'Terragrunt', 'Helm', 'Argo CD', 'GitOps'],
-      flow: true,
     },
     {
       title: 'Cutting cloud cost by a third',
@@ -73,6 +74,7 @@ export const work = {
 export const flow = {
   label:
     'Generic platform flow: a pull request in Git is applied by Terraform and Terragrunt to Google Cloud, and by Argo CD with Helm to the GKE clusters.',
+  title: 'How a change reaches production',
   note: 'Generic diagram of the pattern. No internal system names.',
   nodes: [
     { tag: 'GIT', text: 'Pull request, review, merge' },
@@ -86,7 +88,7 @@ export type Item = { kicker: string; title: string; text: string };
 
 export const earlier = {
   heading: 'Earlier work',
-  label: 'Mobi / BSM Technologies · 2017 – 2019',
+  label: 'Mobi / BSM Technologies, 2017 - 2019',
   items: [
     {
       kicker: 'Delivery pipeline',
@@ -103,10 +105,10 @@ export const earlier = {
 
 export const teaching = {
   heading: 'Teaching and community',
-  label: '2018 – 2024',
+  label: '2018 - 2024',
   items: [
     {
-      kicker: 'Universidad Francisco Marroquín · 2018 – 2020',
+      kicker: 'Universidad Francisco Marroquín, 2018 - 2020',
       title: 'Computer science instructor',
       text: 'Taught computer science to undergraduates in Guatemala City.',
     },
@@ -116,7 +118,7 @@ export const teaching = {
       text: 'Led the local Docker community and received an honorable mention for community leadership at DockerCon 2020.',
     },
     {
-      kicker: 'kontinu.io · 2020 – 2024',
+      kicker: 'kontinu.io, 2020 - 2024',
       title: 'Bootcamps for banks and IT firms',
       text: "Founded a consultancy that ran cloud-native, DevOps and Extreme Programming bootcamps for two of Guatemala's largest banks and a global customer-experience and IT services company, including sessions that taught HR and recruiting teams how engineering roles work.",
     },
