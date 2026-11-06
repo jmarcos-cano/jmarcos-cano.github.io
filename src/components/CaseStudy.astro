@@ -6,6 +6,7 @@ const { study } = Astro.props;
 ---
 <article class="case">
   <div>
+    {study.where && <p class="kicker where">{study.where}</p>}
     <h3>{study.title}</h3>
     <div class="facts">
       {study.facts.map((f) => (
