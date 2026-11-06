@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Portfolio of Jairo Marcos Cano, Senior Platform Engineer: GKE, Terraform, GitOps and cloud cost work.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230a6c74%27/%3E%3Cpath d=%27M7 22V10l9 8 9-8v12%27 fill=%27none%27 stroke=%27white%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E">
+<meta property="og:title" content="Jairo Marcos Cano, Platform Engineer">
+<meta property="og:description" content="GKE, Terraform, GitOps and cloud cost work. Selected case studies, teaching and community.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0a6c74">
 <title>Jairo Marcos Cano, Platform Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,6 +117,8 @@ button.copy:hover { border-color: var(--accent); }
   section { padding-block: 36px; }
   .case, .stack, .pair { grid-template-columns: minmax(0, 1fr); }
   .facts { flex-direction: row; flex-wrap: wrap; gap: 12px 28px; }
+  .flow-grid { grid-template-columns: minmax(0, 1fr); min-width: 0; }
+  .node:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -12px; transform: translate(-50%, 50%); }
 }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 </style>
