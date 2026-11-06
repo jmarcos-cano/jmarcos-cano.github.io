@@ -48,7 +48,6 @@ const headline = profile.thesis.replace(profile.thesisHighlight, `<mark>${profil
 
     <section id="work" class="sec wrap">
       <h2>{work.heading}</h2>
-      <p class="meta">{work.label}</p>
       <p class="sub">{work.intro}</p>
       <div class="cases">
         {work.cases.map((c) => <CaseStudy study={c} />)}

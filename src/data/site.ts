@@ -19,6 +19,7 @@ export const profile = {
 };
 
 export type Case = {
+  where?: string; // employer line, shown once at the start of a group of cases
   title: string;
   facts: { value: string; label: string }[];
   problem: string;
@@ -30,11 +31,11 @@ export type Case = {
 
 export const work = {
   heading: 'Selected work',
-  label: 'Geotab, 2019 - present',
   intro:
     'The code and internal systems stay at the company. These write-ups cover the problem, the decisions and the outcome, with system names generalized.',
   cases: [
     {
+      where: 'Geotab, Senior Platform Engineer, 2019 - present',
       title: 'Leaving the data center for GKE',
       facts: [
         { value: '6', label: 'GKE clusters, US / EU / Asia' },
@@ -70,6 +71,18 @@ export const work = {
       outcome: 'Google Cloud costs for the domain fell by 34% in 2026.',
       chips: ['FinOps', 'Governance', 'GCP'],
     },
+    {
+      where: 'Olinqua, Head of DevOps and Cloud Engineering (contract), Jan 2023 - Jun 2026',
+      title: 'Delivery and Azure foundations for healthcare products',
+      facts: [{ value: '3+', label: 'years leading DevOps and cloud engineering' }],
+      problem:
+        'Healthcare products had no automated builds or deployments, and the Azure virtual machine estate was set up by hand for every new partner and customer.',
+      approach:
+        'I built CI/CD pipelines for the products and moved provisioning for new partners and customers to infrastructure as code, reviewed like application code. I also designed an Azure Landing Zones architecture as the standard foundation for networking, identity, governance and security.',
+      outcome:
+        'New partners and customers come from repeatable, reviewed code instead of manual setup. Azure costs fell after optimizing the virtual machine infrastructure, and most day-to-day operations are automated.',
+      chips: ['Azure', 'Landing Zones', 'Infrastructure as code', 'CI/CD'],
+    },
   ] satisfies Case[],
 };
 
@@ -90,17 +103,27 @@ export type Item = { kicker: string; title: string; text: string };
 
 export const earlier = {
   heading: 'Earlier work',
-  label: 'Mobi / BSM Technologies, 2017 - 2019',
+  label: '2015 - 2023',
   items: [
     {
-      kicker: 'Delivery pipeline',
+      kicker: 'DXC healthcare software business, later Dedalus, contract, 2021 - 2023',
+      title: 'One delivery standard for healthcare teams',
+      text: 'Hired to standardize how several healthcare product teams build, test, release and monitor software as the business moved to SaaS. Introduced CI/CD, made GitLab the shared source control and brought Docker to OpenShift. After Dedalus took over the business, I assessed teams with very different setups and led a consolidation plan for shared CI/CD, containers and infrastructure as code.',
+    },
+    {
+      kicker: 'Mobi / BSM Technologies, 2017 - 2019',
       title: 'Weeks to hours',
       text: 'Rebuilt the delivery pipeline in under 8 months. The result was one-click deployments to any environment and a business that decides when and what to release. Release lead time dropped from weeks to hours.',
     },
     {
-      kicker: 'Containerization',
+      kicker: 'Mobi / BSM Technologies, 2017 - 2019',
       title: '48+ applications, 16+ clusters',
       text: 'Moved more than 48 monolith-style applications to independently deployable services on Docker Swarm, across more than 16 multi-AZ clusters, with approvals and releases through Octopus Deploy.',
+    },
+    {
+      kicker: 'Autobytel / Autoweb, 2015 - 2017',
+      title: 'Led a 12-person release team',
+      text: "Managed developers and system administrators who automated releases to every environment with Jenkins, Ansible, Chef, Docker and Terraform on AWS, and owned the branching model and delivery standards. Before that I started the company's DevOps transformation with a team of about 10, introducing CI/CD, infrastructure as code and its first automated test suites.",
     },
   ] satisfies Item[],
 };
@@ -123,11 +146,6 @@ export const teaching = {
       kicker: 'kontinu.io, 2020 - 2024',
       title: 'Bootcamps for banks and IT firms',
       text: "Founded a consultancy that ran cloud-native, DevOps and Extreme Programming bootcamps for two of Guatemala's largest banks and a global customer-experience and IT services company, including sessions that taught HR and recruiting teams how engineering roles work.",
-    },
-    {
-      kicker: 'Contract work',
-      title: 'Healthcare platforms',
-      text: 'Led DevOps and cloud engineering as a contractor for Olinqua in Australia on Azure, and for DXC Technology and Dedalus on OpenShift.',
     },
   ] satisfies Item[],
 };
