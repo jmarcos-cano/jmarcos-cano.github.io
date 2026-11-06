@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import CaseStudy from '../components/CaseStudy.astro';
+import ItemGrid from '../components/ItemGrid.astro';
+import { profile, work, earlier, teaching, stack, wip } from '../data/site';
+---
+<Base title={profile.title} description={profile.description}>
+  <header>
+    <div class="label">{profile.kicker}</div>
+    <h1>{profile.name}</h1>
+    <p class="thesis">{profile.thesis}</p>
+    <p class="intro" set:html={profile.intro} />
+    <div class="links">
+      <a href={profile.linkedin}>LinkedIn</a>
+      <span>{profile.email}</span>
+    </div>
+  </header>
+
+  <section id="work">
+    <div class="head"><h2>{work.heading}</h2><span class="label">{work.label}</span></div>
+    <p class="sub">{work.intro}</p>
+    {work.cases.map((c) => <CaseStudy study={c} />)}
+  </section>
+
+  <ItemGrid id="earlier" heading={earlier.heading} label={earlier.label} items={earlier.items} />
+  <ItemGrid id="teaching" heading={teaching.heading} label={teaching.label} items={teaching.items} />
+
+  <section id="stack">
+    <div class="head"><h2>{stack.heading}</h2></div>
+    <dl class="stack">
+      {stack.rows.map(([k, v]) => (<><dt>{k}</dt><dd>{v}</dd></>))}
+    </dl>
+    {wip && (
+      <div class="wip">
+        <span class="pill">In progress</span>
+        <h3 style="margin-top:10px;font-size:1.15rem">{wip.title}</h3>
+        <p class="sub" style="margin-top:6px">{wip.text}</p>
+        <ul>{wip.bullets.map((b) => <li>{b}</li>)}</ul>
+      </div>
+    )}
+  </section>
+
+  <footer>
+    <div>{profile.tagline}</div>
+    <div class="links">
+      <a href={profile.linkedin}>{profile.linkedinLabel}</a>
+      <span><span id="mail">{profile.email}</span><button class="copy" id="copy" type="button">Copy</button></span>
+    </div>
+  </footer>
+</Base>
+
+<script>
+  const b = document.getElementById('copy');
+  const m = document.getElementById('mail');
+  b?.addEventListener('click', () => {
+    if (!m) return;
+    const done = () => { b.textContent = 'Copied'; setTimeout(() => (b.textContent = 'Copy'), 1500); };
+    const fallback = () => {
+      const r = document.createRange(); r.selectNodeContents(m);
+      const s = window.getSelection(); s?.removeAllRanges(); s?.addRange(r);
+      b.textContent = 'Selected';
+    };
+    try { navigator.clipboard.writeText(m.textContent ?? '').then(done, fallback); } catch { fallback(); }
+  });
+</script>

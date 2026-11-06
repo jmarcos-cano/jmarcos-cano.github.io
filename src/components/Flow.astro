@@ -1,0 +1,11 @@
+---
+import { flow } from '../data/site';
+---
+<div class="flow" role="img" aria-label={flow.label}>
+  <div class="flow-grid">
+    {flow.nodes.map((n) => (
+      <div class="node"><b>{n.tag}</b>{n.text}</div>
+    ))}
+  </div>
+  <p class="flow-note">{flow.note}</p>
+</div>
