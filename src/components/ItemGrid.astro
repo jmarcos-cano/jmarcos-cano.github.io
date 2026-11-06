@@ -1,17 +1,35 @@
 ---
 import type { Item } from '../data/site';
-interface Props { id: string; heading: string; label: string; items: Item[] }
-const { id, heading, label, items } = Astro.props;
+interface Props { id: string; heading: string; label: string; items: Item[]; variant: 'tiles' | 'list' }
+const { id, heading, label, items, variant } = Astro.props;
 ---
-<section id={id}>
-  <div class="head"><h2>{heading}</h2><span class="label">{label}</span></div>
-  <div class="pair">
-    {items.map((i) => (
-      <div class="item">
-        <span class="label">{i.kicker}</span>
-        <h3>{i.title}</h3>
-        <p>{i.text}</p>
-      </div>
-    ))}
-  </div>
-</section>
+{variant === 'tiles' ? (
+  <section id={id} class="sec wrap">
+    <h2>{heading}</h2>
+    <p class="meta">{label}</p>
+    <div class="tiles">
+      {items.map((i) => (
+        <article class="tile">
+          <p class="kicker">{i.kicker}</p>
+          <div>
+            <h3>{i.title}</h3>
+            <p>{i.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+) : (
+  <section id={id} class="sec wrap split">
+    <div class="head"><h2>{heading}</h2><p class="meta">{label}</p></div>
+    <div>
+      {items.map((i) => (
+        <article class="row">
+          <p class="kicker">{i.kicker}</p>
+          <h3>{i.title}</h3>
+          <p>{i.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+)}
