@@ -1,5 +1,6 @@
 ---
 import type { Case } from '../data/site';
+import Flow from './Flow.astro';
 interface Props { study: Case }
 const { study } = Astro.props;
 ---
@@ -12,10 +13,13 @@ const { study } = Astro.props;
       ))}
     </div>
   </div>
-  <dl class="spec">
-    <div><dt>Problem</dt><dd>{study.problem}</dd></div>
-    <div><dt>Approach</dt><dd>{study.approach}</dd></div>
-    <div><dt>Outcome</dt><dd>{study.outcome}</dd></div>
-    <div><dt>Tools</dt><dd><ul class="chips">{study.chips.map((c) => <li>{c}</li>)}</ul></dd></div>
-  </dl>
+  <div>
+    <dl class="spec">
+      <div><dt>Problem</dt><dd>{study.problem}</dd></div>
+      <div><dt>Approach</dt><dd>{study.approach}</dd></div>
+      <div><dt>Outcome</dt><dd>{study.outcome}</dd></div>
+      <div><dt>Tools</dt><dd><ul class="chips">{study.chips.map((c) => <li>{c}</li>)}</ul></dd></div>
+    </dl>
+    {study.flow && <Flow />}
+  </div>
 </article>
