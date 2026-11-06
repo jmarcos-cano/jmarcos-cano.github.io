@@ -58,12 +58,18 @@ mark { background: none; color: var(--ink); }
 /* Hero */
 .hero { padding-block: clamp(48px, 8vw, 96px) clamp(56px, 8vw, 104px); }
 h1 { font-size: clamp(2.25rem, 4.8vw, 3.9rem); line-height: 1.08; }
-.hero-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px clamp(28px, 4.5vw, 64px); align-items: start; margin-top: clamp(32px, 5vw, 64px); }
+.hero-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 22rem); gap: 32px clamp(28px, 4.5vw, 64px); align-items: start; margin-top: clamp(32px, 5vw, 64px); }
+.hero-row.solo { grid-template-columns: minmax(0, 1fr); }
 .lede { font-size: 1.1875rem; line-height: 1.55; color: var(--ink-2); max-width: 36ch; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 
+/* Portrait slot: public/portrait.jpg, 4:5 */
+.portrait { margin: 0; width: 100%; aspect-ratio: 4 / 5; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; background: var(--panel); }
+.portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.portrait.empty { display: grid; place-items: center; padding: 24px; text-align: center; border-style: dashed; border-color: var(--line-strong); color: var(--ink-2); font: 400 .8125rem var(--font-mono); }
+
 /* The change path as a graph of nodes */
-.flow { margin: 0; padding: clamp(20px, 3vw, 32px); background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); }
+.flow { margin: 28px 0 0; padding: clamp(20px, 3vw, 32px); background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); }
 .flow-title { font: 400 .8125rem var(--font-mono); color: var(--ink-2); }
 .flow ol { list-style: none; margin: 16px 0 0; padding: 0; }
 .flow li { position: relative; display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: 16px; align-items: center; padding: 14px 0; }
@@ -131,6 +137,7 @@ h2 { font-size: clamp(1.75rem, 3.2vw, 2.5rem); line-height: 1.1; }
 
 @media (max-width: 860px) {
   .hero-row, .case, .wip, .tiles, .split, .stack, .cta { grid-template-columns: minmax(0, 1fr); }
+  .portrait { max-width: 22rem; }
   .split .head { position: static; }
   .tile { gap: 32px; }
   .facts { grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); }
@@ -143,18 +150,16 @@ h2 { font-size: clamp(1.75rem, 3.2vw, 2.5rem); line-height: 1.1; }
   .flow b { min-width: 0; }
 }
 
-/* Motion: the hero arrives in sequence and the path draws in order; panels rise as they enter */
+/* Motion: the hero arrives in sequence; panels rise and the path draws as they scroll into view */
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
   @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
   @keyframes draw { from { transform: scaleY(0); } }
   h1 { animation: rise .8s var(--ease) both; }
   .hero-row > div:first-child { animation: rise .8s var(--ease) .12s both; }
-  .flow { animation: rise .8s var(--ease) .24s both; }
-  .flow li { animation: rise .6s var(--ease) both; animation-delay: calc(.45s + var(--i, 0) * .16s); }
-  .flow li + li::before { animation: draw .5s var(--ease) both; animation-delay: calc(.4s + var(--i, 0) * .16s); }
-  .flow li:nth-child(2) { --i: 1; } .flow li:nth-child(3) { --i: 2; } .flow li:nth-child(4) { --i: 3; }
+  .portrait { animation: rise .8s var(--ease) .24s both; }
   @supports (animation-timeline: view()) {
     .case, .wip, .tile, .row, .cta { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+    .flow li + li::before { animation: draw linear both; animation-timeline: view(); animation-range: entry 20% entry 70%; }
   }
 }

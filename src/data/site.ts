@@ -25,6 +25,7 @@ export type Case = {
   approach: string;
   outcome: string;
   chips: string[];
+  flow?: boolean; // show the generic platform diagram under this case
 };
 
 export const work = {
@@ -57,6 +58,7 @@ export const work = {
       outcome:
         'Every change to every environment is made and reviewed through Git. New environments and services come from the same modules instead of hand-built copies.',
       chips: ['Terraform', 'Terragrunt', 'Helm', 'Argo CD', 'GitOps'],
+      flow: true,
     },
     {
       title: 'Cutting cloud cost by a third',
