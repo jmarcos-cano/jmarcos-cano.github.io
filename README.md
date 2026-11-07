@@ -21,6 +21,8 @@ Requires Node 22.23.4 or newer.
 | `src/pages/index.astro` | The page layout. |
 | `src/components/` | `CaseStudy`, `Flow` (the generic platform diagram) and `ItemGrid`. |
 | `src/layouts/Base.astro` | `<head>`, fonts, favicon and link-preview tags. |
+| `src/scripts/motion.ts` | Scroll motion: reading progress, current section, the traced change path, case reveal and number count-up. Does nothing with reduced motion. |
+| `src/components/FactViz.astro` | The small drawings under headline numbers, set per fact with `viz` in `site.ts`. |
 | `src/styles/global.css` | Design tokens (light and dark) and all styles. |
 | `public/` | Files served as-is, such as `favicon.svg`. |
 | `astro.config.mjs` | The site URL. Change `site` if the address changes. |
