@@ -11,7 +11,9 @@ RUN npm ci
 FROM deps AS dev
 COPY . .
 EXPOSE 4321
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "4321", "--ignore-lock"]
+# Astro runs as PID 1: exec form, started with node directly (no npm or shell wrapper), so it
+# receives SIGTERM/SIGINT itself and handles them. --ignore-lock keeps it in the foreground.
+CMD ["node", "node_modules/astro/bin/astro.mjs", "dev", "--host", "0.0.0.0", "--port", "4321", "--ignore-lock"]
 
 FROM deps AS build
 COPY . .
