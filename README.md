@@ -13,6 +13,18 @@ npm run preview  # serve dist/ locally
 
 Requires Node 22.23.4 or newer.
 
+### With Docker
+
+No local Node needed, only Docker.
+
+```sh
+docker compose up                              # dev server at http://localhost:4321, reloads on save
+docker compose --profile site up --build site  # the built site as deployed, at http://localhost:8080
+docker compose down                            # stop
+```
+
+After changing `package.json`, rebuild the dev image with `docker compose up --build`.
+
 ## Where things are
 
 | Path | What it holds |
