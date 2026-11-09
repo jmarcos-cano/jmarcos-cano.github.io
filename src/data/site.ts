@@ -120,13 +120,8 @@ export const earlier = {
     },
     {
       kicker: 'DevOps Engineer, later Senior DevOps Engineer, Mobi / BSM Technologies, 2017 - 2019',
-      title: '44 microservices, containerized',
-      text: 'Right after joining, I took 44 microservices that were deployed as plain Node.js processes and containerized them. They moved to Docker Swarm, then to more than 16 multi-AZ clusters.',
-    },
-    {
-      kicker: 'DevOps Engineer, later Senior DevOps Engineer, Mobi / BSM Technologies, 2017 - 2019',
-      title: 'Weeks to hours',
-      text: 'Rebuilt the delivery pipeline in under 8 months around Octopus Deploy. The result was one-click deployments to any environment, with approvals and releases in the business\'s hands. Release lead time dropped from weeks to hours.',
+      title: 'From plain Node.js to one-click deploys',
+      text: 'Right after joining, I containerized 44 microservices that were deployed as plain Node.js processes and moved them to Docker Swarm, then to more than 16 multi-AZ clusters. I rebuilt the delivery pipeline in under 8 months around Octopus Deploy, giving one-click deployments to any environment and a business that decides when and what to release. Release lead time dropped from weeks to hours.',
     },
     {
       kicker: 'Automation Engineering Manager, earlier Release Manager and QA Team Leader, Autobytel / Autoweb, 2015 - 2017',
