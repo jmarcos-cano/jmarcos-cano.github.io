@@ -3,10 +3,10 @@
 export const profile = {
   name: 'Jairo Marcos Cano',
   location: 'Guatemala City',
-  thesis: 'I build the cloud platforms other engineers deploy onto.',
-  thesisHighlight: 'cloud platforms', // wrapped in a highlight in the hero headline
+  thesis: 'Platform engineer with more than twelve years in infrastructure, DevOps and cloud.',
+  thesisHighlight: 'infrastructure, DevOps and cloud', // wrapped in a highlight in the hero headline
   short:
-    'Senior Platform Engineer at Geotab. I run the infrastructure for the Routing and Optimization domain on the company-wide Google Cloud platform.',
+    'Senior Platform Engineer at Geotab, running infrastructure for the Routing and Optimization domain.',
   intro:
     'Senior Platform Engineer with more than 12 years in infrastructure, DevOps and cloud. At <strong>Geotab</strong> I own the infrastructure for the Routing and Optimization domain on the company-wide Google Cloud and GKE platform: Terraform modules, infrastructure as code and lifecycle. Before that I rebuilt delivery pipelines, taught computer science, and ran bootcamps for banks and global IT firms.',
   linkedin: 'https://www.linkedin.com/in/marcos-cano-804a1787',
