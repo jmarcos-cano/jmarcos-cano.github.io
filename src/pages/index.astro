@@ -5,9 +5,8 @@ import ItemGrid from '../components/ItemGrid.astro';
 import { existsSync } from 'node:fs';
 import { profile, work, earlier, teaching, stack, wip } from '../data/site';
 
-// Drop a photo at public/portrait.jpg. Without one, dev shows a placeholder and production collapses the slot.
+// Drop a photo at public/portrait.jpg. Without one, the slot collapses.
 const hasPortrait = existsSync('public/portrait.jpg');
-const showSlot = hasPortrait || import.meta.env.DEV;
 
 const headline = profile.thesis.replace(profile.thesisHighlight, `<mark>${profile.thesisHighlight}</mark>`);
 ---
@@ -29,7 +28,7 @@ const headline = profile.thesis.replace(profile.thesisHighlight, `<mark>${profil
   <main id="top">
     <section class="hero wrap">
       <h1 set:html={headline} />
-      <div class:list={['hero-row', { solo: !showSlot }]}>
+      <div class:list={['hero-row', { solo: !hasPortrait }]}>
         <div>
           <p class="lede">{profile.short}</p>
           <div class="actions">
@@ -39,9 +38,6 @@ const headline = profile.thesis.replace(profile.thesisHighlight, `<mark>${profil
         </div>
         {hasPortrait && (
           <figure class="portrait"><img src="/portrait.jpg" alt={`Portrait of ${profile.name}`} fetchpriority="high" /></figure>
-        )}
-        {!hasPortrait && showSlot && (
-          <figure class="portrait empty"><p>Dev placeholder. Add public/portrait.jpg</p></figure>
         )}
       </div>
     </section>
