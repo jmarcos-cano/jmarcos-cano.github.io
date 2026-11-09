@@ -6,7 +6,7 @@ export const profile = {
   thesis: 'I build the cloud platforms other engineers deploy onto.',
   thesisHighlight: 'cloud platforms', // wrapped in a highlight in the hero headline
   short:
-    'Senior Platform Engineer at Geotab. I own GKE, Terraform and GitOps for the Routing and Optimization domain.',
+    'Senior Platform Engineer at Geotab. I run the infrastructure for the Routing and Optimization domain on the company-wide Google Cloud platform.',
   intro:
     'Senior Platform Engineer with more than 12 years in infrastructure, DevOps and cloud. At <strong>Geotab</strong> I own the infrastructure for the Routing and Optimization domain on the company-wide Google Cloud and GKE platform: Terraform modules, infrastructure as code and lifecycle. Before that I rebuilt delivery pipelines, taught computer science, and ran bootcamps for banks and global IT firms.',
   linkedin: 'https://www.linkedin.com/in/marcos-cano-804a1787',
@@ -78,10 +78,10 @@ export const work = {
       problem:
         'Healthcare products had no automated builds or deployments, and the Azure virtual machine estate was set up by hand for every new partner and customer.',
       approach:
-        'I built CI/CD pipelines for the products and moved provisioning for new partners and customers to infrastructure as code, reviewed like application code. I also designed an Azure Landing Zones architecture as the standard foundation for networking, identity, governance and security.',
+        'I built CI/CD pipelines for the products, introduced Octopus Deploy for releases, and moved provisioning for new partners and customers to infrastructure as code, reviewed like application code. I also designed an Azure Landing Zones architecture as the standard foundation for networking, identity, governance and security.',
       outcome:
         'New partners and customers come from repeatable, reviewed code instead of manual setup. Azure costs fell after optimizing the virtual machine infrastructure, and most day-to-day operations are automated.',
-      chips: ['Azure', 'Landing Zones', 'Infrastructure as code', 'CI/CD'],
+      chips: ['Azure', 'Landing Zones', 'Octopus Deploy', 'Infrastructure as code', 'CI/CD'],
     },
   ] satisfies Case[],
 };
@@ -106,22 +106,22 @@ export const earlier = {
   label: '2015 - 2023',
   items: [
     {
-      kicker: 'DXC healthcare software business, later Dedalus, contract, 2021 - 2023',
+      kicker: 'Cloud Engineering and DevOps Lead (contract), DXC healthcare software business, later Dedalus, 2021 - 2023',
       title: 'One delivery standard for healthcare teams',
       text: 'Hired to standardize how several healthcare product teams build, test, release and monitor software as the business moved to SaaS. Introduced CI/CD, made GitLab the shared source control and brought Docker to OpenShift. After Dedalus took over the business, I assessed teams with very different setups and led a consolidation plan for shared CI/CD, containers and infrastructure as code.',
     },
     {
-      kicker: 'Mobi / BSM Technologies, 2017 - 2019',
+      kicker: 'DevOps Engineer, later Senior DevOps Engineer, Mobi / BSM Technologies, 2017 - 2019',
+      title: '44 microservices, containerized',
+      text: 'Right after joining, I took 44 microservices that were deployed as plain Node.js processes and containerized them. They moved to Docker Swarm, then to more than 16 multi-AZ clusters.',
+    },
+    {
+      kicker: 'DevOps Engineer, later Senior DevOps Engineer, Mobi / BSM Technologies, 2017 - 2019',
       title: 'Weeks to hours',
-      text: 'Rebuilt the delivery pipeline in under 8 months. The result was one-click deployments to any environment and a business that decides when and what to release. Release lead time dropped from weeks to hours.',
+      text: 'Rebuilt the delivery pipeline in under 8 months around Octopus Deploy. The result was one-click deployments to any environment, with approvals and releases in the business\'s hands. Release lead time dropped from weeks to hours.',
     },
     {
-      kicker: 'Mobi / BSM Technologies, 2017 - 2019',
-      title: '48+ applications, 16+ clusters',
-      text: 'Moved more than 48 monolith-style applications to independently deployable services on Docker Swarm, across more than 16 multi-AZ clusters, with approvals and releases through Octopus Deploy.',
-    },
-    {
-      kicker: 'Autobytel / Autoweb, 2015 - 2017',
+      kicker: 'Automation Engineering Manager, earlier Release Manager and QA Team Leader, Autobytel / Autoweb, 2015 - 2017',
       title: 'Led a 12-person release team',
       text: "Managed developers and system administrators who automated releases to every environment with Jenkins, Ansible, Chef, Docker and Terraform on AWS, and owned the branching model and delivery standards. Before that I started the company's DevOps transformation with a team of about 10, introducing CI/CD, infrastructure as code and its first automated test suites.",
     },
