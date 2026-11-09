@@ -1,20 +1,25 @@
 ---
 import type { Case } from '../data/site';
 import Flow from './Flow.astro';
+import FactViz from './FactViz.astro';
 interface Props { study: Case }
 const { study } = Astro.props;
 ---
 <article class="case">
-  <div>
+  <div class="case-head">
     {study.where && <p class="kicker where">{study.where}</p>}
     <h3>{study.title}</h3>
     <div class="facts">
       {study.facts.map((f) => (
-        <div class="fact"><b>{f.value}</b><span>{f.label}</span></div>
+        <div class="fact">
+          <b data-count aria-label={f.value}>{f.value}</b>
+          <span>{f.label}</span>
+          {f.viz && <FactViz viz={f.viz} value={f.value} />}
+        </div>
       ))}
     </div>
   </div>
-  <div>
+  <div class="case-body">
     <dl class="spec">
       <div><dt>Problem</dt><dd>{study.problem}</dd></div>
       <div><dt>Approach</dt><dd>{study.approach}</dd></div>

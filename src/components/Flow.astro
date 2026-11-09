@@ -2,11 +2,15 @@
 import { flow } from '../data/site';
 ---
 <figure class="flow" role="img" aria-label={flow.label}>
-  <p class="flow-title">{flow.title}</p>
-  <ol>
-    {flow.nodes.map((n) => (
-      <li><b>{n.tag}</b><span>{n.text}</span></li>
-    ))}
-  </ol>
+  <p class="flow-title">{flow.title}<span class="flow-step" aria-hidden="true"></span></p>
+  <div class="flow-path">
+    <ol>
+      {flow.nodes.map((n) => (
+        <li><b>{n.tag}</b><span>{n.text}</span></li>
+      ))}
+    </ol>
+    <span class="flow-track" aria-hidden="true"><span></span></span>
+    <span class="flow-dot" aria-hidden="true"></span>
+  </div>
   <p class="flow-note">{flow.note}</p>
 </figure>

@@ -161,7 +161,68 @@ h2 { font-size: clamp(1.75rem, 3.2vw, 2.5rem); line-height: 1.1; }
   .hero-row > div:first-child { animation: rise .8s var(--ease) .12s both; }
   .portrait { animation: rise .8s var(--ease) .24s both; }
   @supports (animation-timeline: view()) {
-    .case, .wip, .tile, .row, .cta { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
-    .flow li + li::before { animation: draw linear both; animation-timeline: view(); animation-range: entry 20% entry 70%; }
+    .wip, .tile, .row, .cta { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+    .flow:not(.traced) li + li::before { animation: draw linear both; animation-timeline: view(); animation-range: entry 20% entry 70%; }
   }
 }
+
+/* ---------- Scroll motion (src/scripts/motion.ts) ----------
+   Rules from .impeccable.md: draw, don't decorate; one expressive idea (the traced change path);
+   no glow, no gradients; everything readable and finished with reduced motion or without scripts. */
+
+/* Reading progress: a hairline on the nav bar. Current section in the nav. */
+.bar { position: relative; }
+.progress { position: absolute; left: 14px; right: 14px; bottom: -1px; height: 1px; background: var(--accent); transform-origin: left; transform: scaleX(var(--p, 0)); pointer-events: none; }
+.bar nav a[aria-current="true"]:not(.btn) { color: var(--accent); }
+
+/* Case heading and numbers stay in view while the longer write-up scrolls past (wide screens). */
+@media (min-width: 861px) {
+  .case-head { position: sticky; top: 96px; align-self: start; }
+}
+
+/* Drawings under headline numbers: drafting marks, dimension lines. Finished state is the default. */
+.fviz { margin-top: 14px; max-width: 18rem; color: var(--accent); }
+.fviz small { font: 400 .6875rem var(--font-mono); color: var(--ink-2); letter-spacing: .02em; }
+.regions { display: flex; gap: 18px; }
+.region { display: grid; gap: 6px; justify-items: start; }
+.marks { display: flex; gap: 6px; }
+.marks i { width: 12px; height: 12px; border: 1px solid var(--accent); border-radius: 50%; background: var(--accent); }
+.cells { display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 3px; max-width: 14rem; }
+.cells i { aspect-ratio: 1; border: 1px solid var(--accent); border-radius: 1px; background: var(--accent); }
+.dims { display: grid; gap: 8px; }
+.dim { display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); align-items: center; gap: 10px; }
+.dims.span .dim { grid-template-columns: minmax(0, 1fr); }
+.dim .line { position: relative; display: block; height: 9px; width: calc(var(--w) * 100%); }
+.dim .line::before { content: ""; position: absolute; left: 0; right: 0; top: 4px; border-top: 1px solid var(--line-strong); }
+.dim .line::after { content: ""; position: absolute; inset: 0; border-inline: 1px solid var(--line-strong); }
+.dim.after .line::before, .dim.after .line::after, .dims.span .line::before, .dims.span .line::after { border-color: var(--accent); }
+.ends { display: flex; justify-content: space-between; gap: 8px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .fviz.armed .marks i, .fviz.armed .cells i { background: transparent; border-color: var(--line-strong); }
+  .fviz.armed.go .marks i, .fviz.armed.go .cells i { background: var(--accent); border-color: var(--accent); }
+  .fviz .marks i, .fviz .cells i { transition: background-color .3s var(--ease), border-color .3s var(--ease); transition-delay: calc(var(--i) * var(--step, 0ms)); }
+  .fviz.armed .marks i { --step: 160ms; }
+  .fviz.armed .cells i { --step: 22ms; }
+  .fviz.armed .dim .line { transform-origin: left; transition: transform 1.3s var(--ease) .25s; }
+  .fviz.armed:not(.go) .dim.after .line { transform: scaleX(calc(1 / var(--w))); } /* starts at full width, shrinks to the ratio */
+  .fviz.armed.span:not(.go) .dim .line { transform: scaleX(0); } /* draws across */
+
+  /* Case studies arrive in reading order */
+  .rv { transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: calc(var(--d, 0) * 90ms); }
+  .rv.pre { opacity: 0; transform: translateY(22px); }
+}
+
+/* The change path, traced by scroll. Only active when motion.ts marks the figure as traced. */
+.flow-step { display: inline-block; margin-left: 12px; color: var(--accent); white-space: nowrap; }
+.flow-path { position: relative; }
+.flow-track, .flow-dot { display: none; }
+.flow.traced .flow-track { display: block; position: absolute; left: var(--x); top: var(--y0); height: calc(var(--y1) - var(--y0)); border-left: 1px dashed var(--line-strong); transform: translateX(-.5px); }
+.flow.traced .flow-track > span { position: absolute; top: 0; left: -1px; width: 1px; height: 100%; background: var(--accent); transform-origin: top; transform: scaleY(var(--p, 0)); }
+.flow.traced .flow-dot { display: block; position: absolute; z-index: 0; left: var(--x); top: calc(var(--y0) + (var(--y1) - var(--y0)) * var(--p, 0)); width: 9px; height: 9px; border-radius: 50%; background: var(--accent); outline: 4px solid var(--panel); transform: translate(-50%, -50%); }
+.flow.traced li + li::before { display: none; }
+.flow.traced li b { position: relative; z-index: 1; background: var(--panel); transition: background-color .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease); }
+.flow.traced li:last-child b { background: var(--panel); border-color: var(--line-strong); color: var(--accent); }
+.flow.traced li span { color: var(--ink-2); transition: color .3s var(--ease); }
+.flow.traced li.on b { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.flow.traced li.on span { color: var(--ink); }

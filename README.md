@@ -13,6 +13,18 @@ npm run preview  # serve dist/ locally
 
 Requires Node 22.23.4 or newer.
 
+### With Docker
+
+No local Node needed, only Docker.
+
+```sh
+docker compose up                              # dev server at http://localhost:4321, reloads on save
+docker compose --profile site up --build site  # the built site as deployed, at http://localhost:8080
+docker compose down                            # stop
+```
+
+After changing `package.json`, rebuild the dev image with `docker compose up --build`.
+
 ## Where things are
 
 | Path | What it holds |
@@ -21,6 +33,8 @@ Requires Node 22.23.4 or newer.
 | `src/pages/index.astro` | The page layout. |
 | `src/components/` | `CaseStudy`, `Flow` (the generic platform diagram) and `ItemGrid`. |
 | `src/layouts/Base.astro` | `<head>`, fonts, favicon and link-preview tags. |
+| `src/scripts/motion.ts` | Scroll motion: reading progress, current section, the traced change path, case reveal and number count-up. Does nothing with reduced motion. |
+| `src/components/FactViz.astro` | The small drawings under headline numbers, set per fact with `viz` in `site.ts`. |
 | `src/styles/global.css` | Design tokens (light and dark) and all styles. |
 | `public/` | Files served as-is, such as `favicon.svg`. |
 | `astro.config.mjs` | The site URL. Change `site` if the address changes. |

@@ -18,10 +18,18 @@ export const profile = {
     'Portfolio of Jairo Marcos Cano, Senior Platform Engineer: GKE, Terraform, GitOps and cloud cost work.',
 };
 
+// A fact can carry a small drawing that explains the number. It animates in on scroll and is static with reduced motion.
+export type FactViz =
+  | { kind: 'regions'; groups: string[]; per: number } // clusters per region
+  | { kind: 'cells' } // one cell per unit of the value
+  | { kind: 'compare'; before: string; after: string; ratio: number } // two dimension lines, after = ratio of before
+  | { kind: 'span'; from: string; to: string }; // one dimension line across the full width
+export type Fact = { value: string; label: string; viz?: FactViz };
+
 export type Case = {
   where?: string; // employer line, shown once at the start of a group of cases
   title: string;
-  facts: { value: string; label: string }[];
+  facts: Fact[];
   problem: string;
   approach: string;
   outcome: string;
@@ -38,8 +46,8 @@ export const work = {
       where: 'Geotab, Senior Platform Engineer, 2019 - present',
       title: 'Leaving the data center for GKE',
       facts: [
-        { value: '6', label: 'GKE clusters, US / EU / Asia' },
-        { value: '44', label: 'services on the platform' },
+        { value: '6', label: 'GKE clusters, US / EU / Asia', viz: { kind: 'regions', groups: ['US', 'EU', 'Asia'], per: 2 } },
+        { value: '44', label: 'services on the platform', viz: { kind: 'cells' } },
       ],
       problem:
         'A routing and optimization domain ran on legacy hosting split between on-premises data centers and AWS, as larger applications that were hard to scale and release independently.',
@@ -51,7 +59,7 @@ export const work = {
     },
     {
       title: 'The whole domain as code',
-      facts: [{ value: '100%', label: 'of changes reviewed in Git' }],
+      facts: [{ value: '100%', label: 'of changes reviewed in Git', viz: { kind: 'span', from: 'Pull request', to: 'Environment' } }],
       problem:
         'Infrastructure for dozens of services across several regions needs to look the same everywhere, and every change needs an owner and a record.',
       approach:
@@ -63,7 +71,7 @@ export const work = {
     },
     {
       title: 'Cutting cloud cost by a third',
-      facts: [{ value: '−34%', label: 'Google Cloud cost, 2026' }],
+      facts: [{ value: '−34%', label: 'Google Cloud cost, 2026', viz: { kind: 'compare', before: 'Before', after: '2026', ratio: 0.66 } }],
       problem:
         'A domain that scales to hundreds of nodes per service can spend a lot on Google Cloud, and the bill needs an owner.',
       approach:

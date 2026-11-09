@@ -1,0 +1,36 @@
+---
+// A small drawing under a headline number. Drawn in its finished state; scripts/motion.ts animates it in when motion is allowed.
+import type { FactViz } from '../data/site';
+interface Props { viz: FactViz; value: string }
+const { viz, value } = Astro.props;
+const count = parseInt(value.replace(/[^\d]/g, ''), 10) || 0;
+---
+{viz.kind === 'regions' && (
+  <div class="fviz regions" aria-hidden="true">
+    {viz.groups.map((g, gi) => (
+      <div class="region">
+        <div class="marks">
+          {Array.from({ length: viz.per }, (_, i) => <i style={`--i:${gi * viz.per + i}`}></i>)}
+        </div>
+        <small>{g}</small>
+      </div>
+    ))}
+  </div>
+)}
+{viz.kind === 'cells' && (
+  <div class="fviz cells" aria-hidden="true">
+    {Array.from({ length: count }, (_, i) => <i style={`--i:${i}`}></i>)}
+  </div>
+)}
+{viz.kind === 'compare' && (
+  <div class="fviz dims" aria-hidden="true">
+    <div class="dim"><small>{viz.before}</small><span class="line" style="--w:1"></span></div>
+    <div class="dim after"><small>{viz.after}</small><span class="line" style={`--w:${viz.ratio}`}></span></div>
+  </div>
+)}
+{viz.kind === 'span' && (
+  <div class="fviz dims span" aria-hidden="true">
+    <div class="dim"><span class="line" style="--w:1"></span></div>
+    <div class="ends"><small>{viz.from}</small><small>{viz.to}</small></div>
+  </div>
+)}
