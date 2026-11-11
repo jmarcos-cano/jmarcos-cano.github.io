@@ -159,6 +159,7 @@ export const stack = {
     ['Cloud', 'Google Cloud (GKE), Microsoft Azure (Landing Zones), AWS'],
     ['Infrastructure as code', 'Terraform, Terragrunt, reusable module design'],
     ['Kubernetes and GitOps', 'Kubernetes, GKE, OpenShift, Helm, Argo CD, Docker'],
+    ['Service mesh', 'Istio: traffic management, mesh configuration, ingress gateways, Envoy configuration'],
     ['CI/CD', 'GitLab CI, Jenkins, Octopus Deploy, Ansible, Chef'],
     ['AI-assisted engineering', 'Orchestrating local and cloud AI agents for infrastructure and platform work'],
     ['Programming', 'Go, Python, Node.js, Bash, Java, C'],
